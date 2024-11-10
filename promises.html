@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //even numbers
+        let func=new Promise(
+            function(resolve,reject){
+                let n=[3]
+                for(i=0;i<n.length;i++){
+                if(n[i]%2==0){
+                    resolve(n[i])
+                }else{
+                    reject("it is odd number")
+                }
+            }
+         }
+         )
+        console.log(func)
+        func.then((msg)=>{
+            console.log(msg)
+        }).catch((msg)=>{
+            console.log(msg)
+
+        })
+        //example 2
+        let d=new Promise((success,error)=>{
+            let data=true
+            if(data){
+                success("data is correct")
+            }else{
+                error("given data is not true")
+            }
+         })
+         console.log(d)
+         d.then((msg)=>{
+            console.log(msg)
+         }).catch((msg)=>{
+             console.log(msg)
+         })
+         //another example
+         function step1(value,error){
+            return new Promise((success,reject)=>{
+                if(!error){
+                    success(value+20)
+                }else{
+                    reject("invalid")
+                }
+            })
+         }
+         function step2(value,error){
+            return new Promise((success,reject)=>{
+                if(!error){
+                    success(value+10)
+                }else{
+                    reject("invalid")
+                }
+            })
+         }
+         step1(10,false)
+         .then((msg1)=>{
+            step2(msg1,false)
+            .then((msg2)=>{
+                console.log(msg2)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        })
+
+    </script>
+</body>
+</html>
